@@ -5,7 +5,7 @@
 package aplicacion;
 
 import javax.swing.JFrame;
-bebebebe
+
 /**
  *
  * @author Daniel
