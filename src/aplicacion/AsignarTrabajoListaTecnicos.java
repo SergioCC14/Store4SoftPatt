@@ -1,4 +1,3 @@
-//PENE
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -6,7 +5,7 @@
 package aplicacion;
 
 import javax.swing.JFrame;
-
+bebebebe
 /**
  *
  * @author Daniel
