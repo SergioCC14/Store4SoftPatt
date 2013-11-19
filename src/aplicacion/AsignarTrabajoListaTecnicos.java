@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Daniel
+ * @author Sergio Canis
  */
 public class AsignarTrabajoListaTecnicos extends javax.swing.JFrame {
 
