@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Daniel
+ * @author Daniel y Sergio
  */
 public class ConsultarListaArticulosCoordinador extends javax.swing.JFrame {
     /**

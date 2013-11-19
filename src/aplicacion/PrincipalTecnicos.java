@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Daniel
+ * @author Daniel y Sergio
  */
 public class PrincipalTecnicos extends javax.swing.JFrame {
 

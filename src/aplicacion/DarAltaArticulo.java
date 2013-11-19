@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Daniel
+ * @author Daniel y Sergio
  */
 public class DarAltaArticulo extends javax.swing.JFrame {
 

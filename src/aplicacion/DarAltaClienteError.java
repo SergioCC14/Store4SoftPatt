@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Daniel
+ * @author Daniel y Sergio
  */
 public class DarAltaClienteError extends javax.swing.JFrame {
 
