@@ -1,23 +1,7 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/Sergio_bpk/Patrones%20Software/src/aplicacion/BorrarClienteConfirmar.java</file>
-            <file>file:/Users/Sergio_bpk/Patrones%20Software/src/aplicacion/BorrarFacturaConfirmar.java</file>
-            <file>file:/Users/Sergio_bpk/Patrones%20Software/src/aplicacion/AsignarTrabajoListaTecnicos.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/danimart1991/Documents/GitHub/Store4SoftPatt/src/aplicacion/AsignarTrabajoListaTecnicos.java</file>
-        </group>
-    </open-files>
-</project-private>
->>>>>>> 465618d4ae077c1200c76c5ba6e5f693f34e75f5
