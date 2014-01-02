@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package aplicacion;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,6 +35,8 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabelError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestión Store4SoftPatt");
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -127,30 +126,27 @@ public class InicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FachadaSesion fachada = new FachadaSesion();
+
+        // Funcional, pero si queremos lucirnos podria tirar de un hashmap con nombres y contraseñas o algo así.
         switch (jTextField1.getText().toLowerCase()) {
             case "almacen": {
-                jLabelError.setText("");
-                JFrame frameAlmacen = new PrincipalAlmacen();
-                frameAlmacen.setVisible(true);
+                fachada.accesoAlmacen();
                 this.dispose();
                 break;
             }
             case "tecnico": {
-                jLabelError.setText("");
-                JFrame frameTecnicos = new PrincipalTecnicos();
-                frameTecnicos.setVisible(true);
+                fachada.accesoTecnico();
                 this.dispose();
                 break;
             }
             case "coordinador": {
-                jLabelError.setText("");
-                JFrame frameCoordinador = new PrincipalCoordinador();
-                frameCoordinador.setVisible(true);
+                fachada.accesoCoordinador();
                 this.dispose();
                 break;
             }
             default: {
-                jLabelError.setText("¡ERROR DE SESIÓN!");
+                fachada.accesoErroneo();
                 break;
             }
         }
