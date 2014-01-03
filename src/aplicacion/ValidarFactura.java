@@ -12,6 +12,7 @@ import javax.swing.JFrame;
  */
 public class ValidarFactura extends javax.swing.JFrame {
 
+    private static Servidor proxy = new Proxy(new ServidorFacturas("MiServidor"));
     /**
      * Creates new form InicioSesion
      */
@@ -307,9 +308,7 @@ public class ValidarFactura extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JFrame frame = new ConfirmarFacturaError();
-        frame.setVisible(true);
-        this.dispose();
+        System.out.println(proxy.enviar(null));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
