@@ -1,4 +1,4 @@
-package conexiones;
+package controladores;
 
 import java.util.HashMap;
 

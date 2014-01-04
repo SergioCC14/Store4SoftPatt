@@ -281,6 +281,8 @@ public class DarAltaPedido extends javax.swing.JFrame {
             pedido.addArticulo(modelo.getArticulos().get(jComboBox4.getSelectedIndex()));
         }
         modelo.addPedido(pedido);
+        modelo.sujeto.setPedido(pedido);
+        modelo.sujeto.notificarObservadores();
         JOptionPane.showMessageDialog(null, "Pedido añadido correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
     }//GEN-LAST:event_jButton3ActionPerformed
 

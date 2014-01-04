@@ -1,4 +1,4 @@
-package controlConcurrencia;
+package controladores;
 
 import java.util.ArrayList;
 

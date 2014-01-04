@@ -1,5 +1,9 @@
 package vista;
 
+import controladores.Observador;
+import controladores.ObservadorConcreto;
+import controladores.Sujeto;
+import controladores.SujetoConcreto;
 import java.util.Date;
 import modelo.Articulo;
 import modelo.Cliente;

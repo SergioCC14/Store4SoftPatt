@@ -1,5 +1,9 @@
 package modelo;
 
+import controladores.Observador;
+import controladores.ObservadorConcreto;
+import controladores.Sujeto;
+import controladores.SujetoConcreto;
 import java.util.ArrayList;
 
 /**
@@ -11,6 +15,11 @@ public class ModeloGlobal {
     private ArrayList<Cliente> clientes = new ArrayList<>();
     private ArrayList<Articulo> articulos = new ArrayList<>();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
+    public Sujeto sujeto = new SujetoConcreto();
+    public Observador proveedor1 = new ObservadorConcreto("Proveedor1",sujeto);
+    public Observador proveedor2 = new ObservadorConcreto("Proveedor2",sujeto);
+    public Observador proveedor3 = new ObservadorConcreto("Proveedor3",sujeto);
+    public Observador proveedor4 = new ObservadorConcreto("Proveedor4",sujeto);
 
     private static ModeloGlobal instancia;
 

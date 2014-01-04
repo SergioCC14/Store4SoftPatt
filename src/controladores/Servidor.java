@@ -1,4 +1,4 @@
-package conexiones;
+package controladores;
 
 public interface Servidor {
     

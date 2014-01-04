@@ -1,4 +1,4 @@
-package conexiones;
+package controladores;
 
 import java.io.File;
 import java.util.Date;

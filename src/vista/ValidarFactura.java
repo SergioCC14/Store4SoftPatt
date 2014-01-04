@@ -4,9 +4,9 @@
  */
 package vista;
 
-import conexiones.Proxy;
-import conexiones.Servidor;
-import conexiones.ServidorFacturas;
+import controladores.Proxy;
+import controladores.Servidor;
+import controladores.ServidorFacturas;
 import javax.swing.JFrame;
 
 /**

@@ -4,7 +4,7 @@
  */
 package vista;
 
-import controlConcurrencia.ContadorFacturas;
+import controladores.ContadorFacturas;
 import javax.swing.JFrame;
 
 /**
