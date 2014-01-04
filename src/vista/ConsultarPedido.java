@@ -30,24 +30,24 @@ public class ConsultarPedido extends javax.swing.JFrame {
         try {
             if (pedido.getArticulos().get(0) != null) {
                 jComboBox1.setSelectedItem(pedido.getArticulos().get(0).getNombre());
-                jTextField6.setText(String.valueOf(modelo.getArticulos().get(jComboBox1.getSelectedIndex()-1).getCoste()));
+                jTextField6.setText(String.valueOf(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1).getCoste()));
             }
             if (pedido.getArticulos().get(1) != null) {
                 jComboBox2.setSelectedItem(pedido.getArticulos().get(1).getNombre());
-                jTextField11.setText(String.valueOf(modelo.getArticulos().get(jComboBox2.getSelectedIndex()-1).getCoste()));
+                jTextField11.setText(String.valueOf(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1).getCoste()));
             }
             if (pedido.getArticulos().get(2) != null) {
                 jComboBox3.setSelectedItem(pedido.getArticulos().get(2).getNombre());
-                jTextField15.setText(String.valueOf(modelo.getArticulos().get(jComboBox3.getSelectedIndex()-1).getCoste()));
+                jTextField15.setText(String.valueOf(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1).getCoste()));
             }
             if (pedido.getArticulos().get(3) != null) {
                 jComboBox4.setSelectedItem(pedido.getArticulos().get(3).getNombre());
-                jTextField19.setText(String.valueOf(modelo.getArticulos().get(jComboBox4.getSelectedIndex()-1).getCoste()));
+                jTextField19.setText(String.valueOf(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1).getCoste()));
             }
-        } catch(Exception e){}
-        
-        jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
+        } catch (Exception e) {
+        }
 
+        jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
     }
 
     /**
@@ -306,23 +306,23 @@ public class ConsultarPedido extends javax.swing.JFrame {
         Date fecha;
         try {
             fecha = DateFormat.getDateInstance().parse(jFormattedTextField1.getText());
-        }catch (Exception e){
+        } catch (Exception e) {
             fecha = new Date();
         }
         Pedido pedido = new Pedido(fecha);
         if (jComboBox1.getSelectedIndex() != 0) {
-            pedido.addArticulo(modelo.getArticulos().get(jComboBox1.getSelectedIndex()));
+            pedido.addArticulo(modelo.getArticulos().get(jComboBox1.getSelectedIndex()-1));
         }
         if (jComboBox2.getSelectedIndex() != 0) {
-            pedido.addArticulo(modelo.getArticulos().get(jComboBox2.getSelectedIndex()));
+            pedido.addArticulo(modelo.getArticulos().get(jComboBox2.getSelectedIndex()-1));
         }
         if (jComboBox3.getSelectedIndex() != 0) {
-            pedido.addArticulo(modelo.getArticulos().get(jComboBox3.getSelectedIndex()));
+            pedido.addArticulo(modelo.getArticulos().get(jComboBox3.getSelectedIndex()-1));
         }
         if (jComboBox4.getSelectedIndex() != 0) {
-            pedido.addArticulo(modelo.getArticulos().get(jComboBox4.getSelectedIndex()));
+            pedido.addArticulo(modelo.getArticulos().get(jComboBox4.getSelectedIndex()-1));
         }
-        modelo.modPedido(pedidoSel,pedido);
+        modelo.modPedido(pedidoSel, pedido);
         modelo.sujeto.setPedido(pedido);
         modelo.sujeto.notificarObservadores();
         JOptionPane.showMessageDialog(null, "Pedido modificado correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
@@ -332,7 +332,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
         if (jComboBox1.getSelectedIndex() == 0) {
             jTextField6.setText("0.00");
         } else {
-            jTextField6.setText(String.valueOf(modelo.getArticulos().get(jComboBox1.getSelectedIndex()-1).getCoste()));
+            jTextField6.setText(String.valueOf(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1).getCoste()));
         }
         jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -341,7 +341,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
         if (jComboBox2.getSelectedIndex() == 0) {
             jTextField11.setText("0.00");
         } else {
-            jTextField11.setText(String.valueOf(modelo.getArticulos().get(jComboBox2.getSelectedIndex()-1).getCoste()));
+            jTextField11.setText(String.valueOf(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1).getCoste()));
         }
         jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
     }//GEN-LAST:event_jComboBox2ActionPerformed
@@ -350,7 +350,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
         if (jComboBox3.getSelectedIndex() == 0) {
             jTextField15.setText("0.00");
         } else {
-            jTextField15.setText(String.valueOf(modelo.getArticulos().get(jComboBox3.getSelectedIndex()-1).getCoste()));
+            jTextField15.setText(String.valueOf(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1).getCoste()));
         }
         jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
     }//GEN-LAST:event_jComboBox3ActionPerformed
@@ -359,7 +359,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
         if (jComboBox4.getSelectedIndex() == 0) {
             jTextField19.setText("0.00");
         } else {
-            jTextField19.setText(String.valueOf(modelo.getArticulos().get(jComboBox4.getSelectedIndex()-1).getCoste()));
+            jTextField19.setText(String.valueOf(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1).getCoste()));
         }
         jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
     }//GEN-LAST:event_jComboBox4ActionPerformed

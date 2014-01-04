@@ -6,31 +6,65 @@
 package modelo;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PeticionTrabajo implements Documento {
 
-    private double precio;
     private Cliente cliente;
     private String id;
     private Date fecha;
-
-    public PeticionTrabajo(double precio, Cliente cliente, Date fecha) {
-        this.precio = precio;
+    
+    private ArrayList<Articulo> articulos = new ArrayList<>();
+    
+    public PeticionTrabajo(Cliente cliente, Date fecha) {
         this.cliente = cliente;
         this.fecha = fecha;
     }
 
     @Override
-    public double getPrecio() {
-        return this.precio;
+    public ArrayList<Articulo> getArticulos() {
+        return articulos;
     }
 
     @Override
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setArticulos(ArrayList<Articulo> articulos) {
+        this.articulos = articulos;
+    }
+    
+    @Override
+    public void addArticulo(Articulo articulo) {
+        articulo.setId(String.valueOf(articulo.hashCode()));
+        articulos.add(articulo);
+    }
+    
+ @Override
+    public void modArticulo(int index, Articulo articulo) {
+        articulo.setId(String.valueOf(articulo.hashCode()));
+        articulos.set(index, articulo);
     }
 
+    @Override
+    public void removeArticulo(int numArticulo) {
+        articulos.remove(numArticulo);
+    }
+    
+    @Override
+    public String calcularPrecio() {
+        double suma = 0.00d;
+        
+        for (Articulo i: articulos) {
+            suma += i.coste;
+        }
+        
+        return String.valueOf(suma);        
+    }
+    
+    @Override
+    public String calcularArticulos() {
+        return String.valueOf(articulos.size());
+    }
+    
     @Override
     public String getId() {
         return this.id;
@@ -63,7 +97,7 @@ public class PeticionTrabajo implements Documento {
 
     @Override
     public String[] ToArray() {
-        String[] array = {this.cliente.getDni(), this.cliente.getNombre(), DateFormat.getDateInstance().format(this.fecha), String.valueOf(precio)};
+        String[] array = {this.cliente.getDni(), this.cliente.getNombre(), DateFormat.getDateInstance().format(this.fecha), calcularPrecio(), calcularArticulos()};
         return array;
     }
 }

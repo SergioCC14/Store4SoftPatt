@@ -74,48 +74,6 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTable" name="jTable1">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
-                <Column editable="true" title="ID." type="java.lang.Object">
-                  <Data value="1"/>
-                  <Data value="2"/>
-                  <Data value="3"/>
-                  <Data value="4"/>
-                </Column>
-                <Column editable="true" title="Estado" type="java.lang.Object">
-                  <Data value="Pendiente"/>
-                  <Data value="Asignado"/>
-                  <Data value="Pendiente Presupuesto"/>
-                  <Data value="Cancelada"/>
-                </Column>
-                <Column editable="true" title="Fecha" type="java.lang.Object">
-                  <Data value="12/34/5678"/>
-                  <Data value="23/45/6789"/>
-                  <Data value="34/56/7890"/>
-                  <Data value="45/67/8901"/>
-                </Column>
-                <Column editable="true" title="Prioridad" type="java.lang.Object">
-                  <Data value="Alta"/>
-                  <Data value="Normal"/>
-                  <Data value="Normal"/>
-                  <Data value="Baja"/>
-                </Column>
-                <Column editable="true" title="Localidad" type="java.lang.Object">
-                  <Data value="Localidad 1"/>
-                  <Data value="Localidad 2"/>
-                  <Data value="Localidad 1"/>
-                  <Data value="Localidad 3"/>
-                </Column>
-                <Column editable="true" title="Trabajo" type="java.lang.Object">
-                  <Data value="Reparacion"/>
-                  <Data value="Instalacion"/>
-                  <Data value="Instalacion"/>
-                  <Data value="Venta"/>
-                </Column>
-              </Table>
-            </Property>
-          </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
           </AccessibilityProperties>

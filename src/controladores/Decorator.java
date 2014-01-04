@@ -1,6 +1,8 @@
 package controladores;
 
+import java.util.ArrayList;
 import java.util.Date;
+import modelo.Articulo;
 import modelo.Cliente;
 import modelo.Documento;
 
@@ -11,7 +13,7 @@ public abstract class Decorator implements Documento {
     public Decorator(Documento documento) {
         this.documento = documento;
     }
-    
+
     public void setDocumento(Documento documento) {
         this.documento = documento;
     }
@@ -19,15 +21,40 @@ public abstract class Decorator implements Documento {
     public Documento getDocumento() {
         return this.documento;
     }
-    
+
     @Override
-    public double getPrecio() {
-        return documento.getPrecio();
+    public ArrayList<Articulo> getArticulos() {
+        return documento.getArticulos();
     }
 
     @Override
-    public void setPrecio(double precio) {
-        documento.setPrecio(precio);
+    public void setArticulos(ArrayList<Articulo> articulos) {
+        documento.setArticulos(articulos);
+    }
+
+    @Override
+    public void addArticulo(Articulo articulo) {
+        documento.addArticulo(articulo);
+    }
+
+    @Override
+    public void modArticulo(int index, Articulo articulo) {
+        documento.modArticulo(index, articulo);
+    }
+
+    @Override
+    public void removeArticulo(int numArticulo) {
+        documento.removeArticulo(numArticulo);
+    }
+
+    @Override
+    public String calcularPrecio() {
+        return documento.calcularPrecio();
+    }
+
+    @Override
+    public String calcularArticulos() {
+        return documento.calcularArticulos();
     }
 
     @Override
@@ -59,9 +86,9 @@ public abstract class Decorator implements Documento {
     public void setCliente(Cliente cliente) {
         documento.setCliente(cliente);
     }
-    
+
     @Override
-    public String[] ToArray(){
+    public String[] ToArray() {
         return documento.ToArray();
     }
 }

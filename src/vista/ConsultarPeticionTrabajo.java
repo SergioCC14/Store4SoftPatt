@@ -8,58 +8,55 @@ import controladores.Proxy;
 import controladores.Servidor;
 import controladores.ServidorFacturas;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import modelo.Articulo;
-import modelo.Factura;
 import modelo.ModeloGlobal;
+import modelo.Pedido;
+import modelo.PeticionTrabajo;
 
 /**
  *
  * @author Daniel y Sergio
  */
-public class ConsultarFactura extends javax.swing.JFrame {
+public class ConsultarPeticionTrabajo extends javax.swing.JFrame {
 
-    private static Servidor proxy = new Proxy(new ServidorFacturas("MiServidor"));
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
-    int facturaSel;
+    int peticionSel;
 
-    public ConsultarFactura(int facturaSel) {
+    public ConsultarPeticionTrabajo(int peticionSel) {
         initComponents();
-        this.facturaSel = facturaSel;
-        Factura factura = modelo.getFacturas().get(facturaSel);
+        this.peticionSel = peticionSel;
+        PeticionTrabajo peticion = modelo.getPeticiones().get(peticionSel);
 
-        jFormattedTextField1.setText(DateFormat.getDateInstance().format(factura.getFecha()));
-        jTextField2.setText(factura.getCliente().getNombre() + " " + factura.getCliente().getApellidos());
-        jTextField3.setText(factura.getId());
+        jFormattedTextField1.setText(DateFormat.getDateInstance().format(peticion.getFecha()));
+        jTextField2.setText(peticion.getCliente().getNombre() + " " + peticion.getCliente().getApellidos());
+        jTextField3.setText(peticion.getId());
 
         try {
-            if (factura.getArticulos().get(0) != null) {
-                jComboBox1.setSelectedItem(factura.getArticulos().get(0).getNombre());
+            if (peticion.getArticulos().get(0) != null) {
+                jComboBox1.setSelectedItem(peticion.getArticulos().get(0).getNombre());
                 jTextField5.setText(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1).getDescripcion());
                 jTextField6.setText(String.valueOf(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1).getCoste()));
             }
-            if (factura.getArticulos().get(1) != null) {
-                jComboBox2.setSelectedItem(factura.getArticulos().get(1).getNombre());
+            if (peticion.getArticulos().get(1) != null) {
+                jComboBox2.setSelectedItem(peticion.getArticulos().get(1).getNombre());
                 jTextField9.setText(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1).getDescripcion());
                 jTextField11.setText(String.valueOf(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1).getCoste()));
             }
-            if (factura.getArticulos().get(2) != null) {
-                jComboBox3.setSelectedItem(factura.getArticulos().get(2).getNombre());
+            if (peticion.getArticulos().get(2) != null) {
+                jComboBox3.setSelectedItem(peticion.getArticulos().get(2).getNombre());
                 jTextField13.setText(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1).getDescripcion());
                 jTextField15.setText(String.valueOf(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1).getCoste()));
             }
-            if (factura.getArticulos().get(3) != null) {
-                jComboBox4.setSelectedItem(factura.getArticulos().get(3).getNombre());
+            if (peticion.getArticulos().get(3) != null) {
+                jComboBox4.setSelectedItem(peticion.getArticulos().get(3).getNombre());
                 jTextField17.setText(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1).getDescripcion());
                 jTextField19.setText(String.valueOf(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1).getCoste()));
             }
         } catch (Exception e) {
         }
 
-        jTextField1.setText(factura.getEstado());
         jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
     }
 
@@ -104,9 +101,6 @@ public class ConsultarFactura extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox();
         jComboBox3 = new javax.swing.JComboBox();
         jComboBox4 = new javax.swing.JComboBox();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,7 +135,7 @@ public class ConsultarFactura extends javax.swing.JFrame {
         jTextField3.setEditable(false);
         jTextField3.setText("1234567890");
 
-        jLabel1.setText("Nº Factura:");
+        jLabel1.setText("Nº Peticion:");
 
         jLabel4.setText("Listado Artículos:");
 
@@ -217,17 +211,6 @@ public class ConsultarFactura extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setText("Estado:");
-
-        jTextField1.setText("Emitida");
-
-        jButton3.setText("Emitir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -294,8 +277,7 @@ public class ConsultarFactura extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -306,10 +288,6 @@ public class ConsultarFactura extends javax.swing.JFrame {
                                     .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                                     .addComponent(jTextField2)
                                     .addComponent(jFormattedTextField1))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -319,9 +297,7 @@ public class ConsultarFactura extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,9 +310,7 @@ public class ConsultarFactura extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(34, 34, 34)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
@@ -370,7 +344,7 @@ public class ConsultarFactura extends javax.swing.JFrame {
                             .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
                             .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8)
                     .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -383,15 +357,15 @@ public class ConsultarFactura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        JFrame frame = new ConsultarListaFacturas();
+        JFrame frame = new ConsultarListaPeticionesTrabajo();
         frame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "¿Seguro que quiere borrar?.", "Confirmar", JOptionPane.YES_NO_OPTION)) {
-            modelo.removeFactura(facturaSel);
-            JFrame frame = new ConsultarListaFacturas();
+            modelo.removePeticion(peticionSel);
+            JFrame frame = new ConsultarListaPeticionesTrabajo();
             frame.setVisible(true);
             this.dispose();
         }
@@ -404,27 +378,22 @@ public class ConsultarFactura extends javax.swing.JFrame {
         } catch (Exception e) {
             fecha = new Date();
         }
-        
-        Factura factura = new Factura(modelo.getFacturas().get(facturaSel).getDocumento(), jTextField1.getText());
-        
-        ArrayList<Articulo> articulos = new ArrayList<>();
+        PeticionTrabajo peticion = new PeticionTrabajo(modelo.getPeticiones().get(peticionSel).getCliente(), fecha);
         if (jComboBox1.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1));
+            peticion.addArticulo(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1));
         }
         if (jComboBox2.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1));
+            peticion.addArticulo(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1));
         }
         if (jComboBox3.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1));
+            peticion.addArticulo(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1));
         }
         if (jComboBox4.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1));
+            peticion.addArticulo(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1));
         }
-        factura.setFecha(fecha);
-        factura.setArticulos(articulos);
         
-        modelo.modFactura(facturaSel, factura);
-        JOptionPane.showMessageDialog(null, "Factura modificada correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
+        modelo.modPeticion(peticionSel, peticion);
+        JOptionPane.showMessageDialog(null, "Petición modificada correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -468,15 +437,9 @@ public class ConsultarFactura extends javax.swing.JFrame {
         jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String mensaje = proxy.enviar("EjFactura.PNG");
-        JOptionPane.showMessageDialog(null, mensaje, "Correcto", JOptionPane.DEFAULT_OPTION);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
@@ -488,7 +451,6 @@ public class ConsultarFactura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -497,7 +459,6 @@ public class ConsultarFactura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField15;

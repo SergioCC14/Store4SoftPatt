@@ -4,8 +4,11 @@
  */
 package vista;
 
-import controladores.ContadorFacturas;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Factura;
+import modelo.ModeloGlobal;
 
 /**
  *
@@ -13,10 +16,17 @@ import javax.swing.JFrame;
  */
 public class ConsultarListaFacturas extends javax.swing.JFrame {
 
-    ContadorFacturas contador = ContadorFacturas.getInstancia();
+    ModeloGlobal modelo = ModeloGlobal.getInstancia();
 
     public ConsultarListaFacturas() {
         initComponents();
+        String[] cn = {"DNI", "Nombre", "Fecha", "Precio", "Articulos", "Emitida"};
+        DefaultTableModel model = new DefaultTableModel();
+        jTable1.setModel(model);
+        model.setColumnIdentifiers(cn);
+        for (Factura i : modelo.getFacturas()) {
+            model.addRow(i.ToArray());
+        }
     }
 
     /**
@@ -42,16 +52,6 @@ public class ConsultarListaFacturas extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"1", "12/34/5678", "x.xx€", "Emitida"},
-                {"2", "23/45/6789", "x.xx€", "Pendiente"},
-                {"3", "34/56/7890", "x.xx€", "Pendiente"}
-            },
-            new String [] {
-                "ID.", "Fecha", "Precio", "Estado"
-            }
-        ));
         jScrollPane1.setViewportView(jTable1);
         jTable1.getAccessibleContext().setAccessibleName("");
 
@@ -101,12 +101,10 @@ public class ConsultarListaFacturas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO: Seleccionar todas las facturas de la lista, hacer algo guay, por ahora solo funciona.
-        // TODO: Hacer contadores para todo tipo de articulos, proveedores... Concurrencia.
-        if (contador.devolverEstadoFactura("1")) {
-            System.out.println("Factura consultandose actualmente. Por favor espere...");
+        if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione primero.", "Error", JOptionPane.OK_OPTION);
         } else {
-            JFrame frame = new ConsultarFactura();
+            JFrame frame = new ConsultarFactura(jTable1.getSelectedRow());
             frame.setVisible(true);
             this.dispose();
         }

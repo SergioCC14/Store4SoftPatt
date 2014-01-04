@@ -1,5 +1,6 @@
 package vista;
 
+import sinUso.PrincipalTecnicos;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 

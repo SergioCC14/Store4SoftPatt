@@ -5,6 +5,10 @@
 package vista;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.ModeloGlobal;
+import modelo.PeticionTrabajo;
 
 /**
  *
@@ -12,11 +16,18 @@ import javax.swing.JFrame;
  */
 public class ConsultarListaPeticionesTrabajo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InicioSesion
-     */
+    ModeloGlobal modelo = ModeloGlobal.getInstancia();
+    
     public ConsultarListaPeticionesTrabajo() {
         initComponents();
+
+        String[] cn = {"DNI", "Nombre", "Fecha", "Precio", "Articulos"};
+        DefaultTableModel model = new DefaultTableModel();
+        jTable1.setModel(model);
+        model.setColumnIdentifiers(cn);
+        for (PeticionTrabajo i : modelo.getPeticiones()) {
+            model.addRow(i.ToArray());
+        }
     }
 
     /**
@@ -43,17 +54,6 @@ public class ConsultarListaPeticionesTrabajo extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"1", "Pendiente", "12/34/5678", "Alta", "Localidad 1", "Reparacion"},
-                {"2", "Asignado", "23/45/6789", "Normal", "Localidad 2", "Instalacion"},
-                {"3", "Pendiente Presupuesto", "34/56/7890", "Normal", "Localidad 1", "Instalacion"},
-                {"4", "Cancelada", "45/67/8901", "Baja", "Localidad 3", "Venta"}
-            },
-            new String [] {
-                "ID.", "Estado", "Fecha", "Prioridad", "Localidad", "Trabajo"
-            }
-        ));
         jScrollPane1.setViewportView(jTable1);
         jTable1.getAccessibleContext().setAccessibleName("");
 
@@ -115,7 +115,13 @@ public class ConsultarListaPeticionesTrabajo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione primero.", "Error", JOptionPane.OK_OPTION);
+        } else {
+            JFrame frame = new ConsultarPeticionTrabajo(jTable1.getSelectedRow());
+            frame.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

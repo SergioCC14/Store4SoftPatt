@@ -4,6 +4,7 @@
  */
 package vista;
 
+import sinUso.ConsultarEstadisticas;
 import javax.swing.JFrame;
 
 /**
@@ -54,6 +55,11 @@ public class PrincipalCoordinador extends javax.swing.JFrame {
         });
 
         jButton3.setText("Presupuestos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Artículos");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +76,11 @@ public class PrincipalCoordinador extends javax.swing.JFrame {
         });
 
         jButton6.setLabel("Peticiones de Trabajo");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Clientes");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -137,9 +148,7 @@ public class PrincipalCoordinador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        JFrame frame2 = new ConsultarEstadisticas();
-        frame2.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -165,6 +174,18 @@ public class PrincipalCoordinador extends javax.swing.JFrame {
         frame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        JFrame frame = new ConsultarListaPresupuestos();
+        frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        JFrame frame = new ConsultarListaPeticionesTrabajo();
+        frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

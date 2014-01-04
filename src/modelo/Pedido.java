@@ -8,7 +8,6 @@ public class Pedido {
 
     String id;
     Date fecha;
-    double precio;
     
     private ArrayList<Articulo> articulos = new ArrayList<>();
 
