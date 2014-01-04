@@ -14,14 +14,15 @@ import modelo.ModeloGlobal;
  * @author Daniel y Sergio
  */
 public class ConsultarCliente extends javax.swing.JFrame {
-
+    
+    Cliente cliente;
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
     int clienteSel;
 
     public ConsultarCliente(int clienteSel) {
         initComponents();
         this.clienteSel = clienteSel;
-        Cliente cliente = modelo.getClientes().get(clienteSel);
+        cliente = modelo.getClientes().get(clienteSel);
 
         jTextField23.setText(cliente.getId());
         jTextField1.setText(cliente.getNombre());
@@ -255,8 +256,16 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         char tipo = jRadioButton1.isSelected() ? 'P' : 'E';
-        Cliente cliente = new Cliente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField21.getText(), jTextField22.getText(), tipo);
-        modelo.modCliente(clienteSel, cliente);
+        
+        Cliente clienteNew = new Cliente(cliente);
+        clienteNew.setNombre(jTextField1.getText());
+        clienteNew.setApellidos(jTextField2.getText());
+        clienteNew.setDni(jTextField3.getText());
+        clienteNew.setDireccion(jTextField21.getText());
+        clienteNew.setTelefono(jTextField22.getText());
+        clienteNew.setTipo(tipo);
+        
+        modelo.modCliente(clienteSel, clienteNew);
         JOptionPane.showMessageDialog(null, "Cliente modificado correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -13,6 +13,16 @@ public class Cliente {
         this.tipo = tipo;
     }
 
+    public Cliente (Cliente original) {
+        this.id = original.getId();
+        this.nombre = original.getNombre();
+        this.apellidos = original.getApellidos();
+        this.dni = original.getDni();
+        this.direccion = original.getDireccion();
+        this.telefono = original.getTelefono();
+        this.tipo = original.tipo;
+    }
+    
     public String getTelefono() {
         return telefono;
     }

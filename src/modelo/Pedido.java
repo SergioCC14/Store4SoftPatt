@@ -14,6 +14,12 @@ public class Pedido {
     public Pedido(Date fecha) {
         this.fecha = fecha;
     }
+    
+    public Pedido(Pedido original){
+        this.id = original.getId();
+        this.fecha = original.getFecha();
+        this.articulos = new ArrayList(original.getArticulos());
+    }
 
     public String getId() {
         return id;

@@ -17,13 +17,14 @@ import modelo.ModeloGlobal;
 public class ConsultarArticulo extends javax.swing.JFrame {
 
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
+    Articulo articulo;
     int articuloSel;
     
     public ConsultarArticulo(int articuloSel) {
         initComponents();
         this.articuloSel = articuloSel;
         
-        Articulo articulo = modelo.getArticulos().get(articuloSel);
+        articulo = modelo.getArticulos().get(articuloSel);
                 
         jTextField23.setText(articulo.getId());
         jTextField1.setText(articulo.getNombre());
@@ -246,8 +247,17 @@ public class ConsultarArticulo extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         char tipo = jRadioButton1.isSelected() ? 'N' : 'E';
-        Articulo articulo = new Articulo(jTextField1.getText(), jTextArea1.getText(),tipo, Double.parseDouble(jTextField2.getText()), Double.parseDouble(jTextField3.getText()), jComboBox1.getSelectedItem().toString());
-        modelo.modArticulo(articuloSel, articulo);
+        
+        // Aplicamos patrón prototype.
+        Articulo articuloNew = new Articulo(articulo);
+        articuloNew.setNombre(jTextField1.getText());
+        articuloNew.setDescripcion(jTextArea1.getText());
+        articuloNew.setTipo(tipo);
+        articuloNew.setPrecio(Double.parseDouble(jTextField2.getText()));
+        articuloNew.setCoste(Double.parseDouble(jTextField3.getText()));
+        articuloNew.setProveedor(jComboBox1.getSelectedItem().toString());
+        
+        modelo.modArticulo(articuloSel, articuloNew);
         JOptionPane.showMessageDialog(null, "Articulo modificado correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
     }//GEN-LAST:event_jButton3ActionPerformed
 

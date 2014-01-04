@@ -4,15 +4,13 @@
  */
 package vista;
 
-import controladores.Proxy;
-import controladores.Servidor;
-import controladores.ServidorFacturas;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Articulo;
 import modelo.ModeloGlobal;
-import modelo.Pedido;
 import modelo.PeticionTrabajo;
 
 /**
@@ -21,13 +19,14 @@ import modelo.PeticionTrabajo;
  */
 public class ConsultarPeticionTrabajo extends javax.swing.JFrame {
 
+    PeticionTrabajo peticion;
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
     int peticionSel;
 
     public ConsultarPeticionTrabajo(int peticionSel) {
         initComponents();
         this.peticionSel = peticionSel;
-        PeticionTrabajo peticion = modelo.getPeticiones().get(peticionSel);
+        peticion = modelo.getPeticiones().get(peticionSel);
 
         jFormattedTextField1.setText(DateFormat.getDateInstance().format(peticion.getFecha()));
         jTextField2.setText(peticion.getCliente().getNombre() + " " + peticion.getCliente().getApellidos());
@@ -378,23 +377,28 @@ public class ConsultarPeticionTrabajo extends javax.swing.JFrame {
         } catch (Exception e) {
             fecha = new Date();
         }
-        PeticionTrabajo peticion = new PeticionTrabajo(modelo.getPeticiones().get(peticionSel).getCliente(), fecha);
+        
+        PeticionTrabajo peticionNew = new PeticionTrabajo(peticion);
+        peticionNew.setCliente(peticion.getCliente());
+        peticionNew.setFecha(fecha);
+      
+        ArrayList<Articulo> articulos = new ArrayList<>();
         if (jComboBox1.getSelectedIndex() != 0) {
-            peticion.addArticulo(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1));
+            articulos.add(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1));
         }
         if (jComboBox2.getSelectedIndex() != 0) {
-            peticion.addArticulo(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1));
+            articulos.add(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1));
         }
         if (jComboBox3.getSelectedIndex() != 0) {
-            peticion.addArticulo(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1));
+            articulos.add(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1));
         }
         if (jComboBox4.getSelectedIndex() != 0) {
-            peticion.addArticulo(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1));
+            articulos.add(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1));
         }
+        peticionNew.setArticulos(articulos);
         
         modelo.modPeticion(peticionSel, peticion);
         JOptionPane.showMessageDialog(null, "Petición modificada correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

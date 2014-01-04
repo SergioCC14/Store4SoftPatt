@@ -25,6 +25,16 @@ public class Articulo {
         this.proveedor = proveedor;
     }
 
+    public Articulo(Articulo original) {
+        this.id = original.getId();
+        this.nombre = original.getNombre();
+        this.descripcion = original.getDescripcion();
+        this.tipo = original.getTipo();
+        this.precio = original.getPrecio();
+        this.coste = original.getCoste();
+        this.proveedor = original.getProveedor();
+    }
+    
     public String getId() {
         return id;
     }

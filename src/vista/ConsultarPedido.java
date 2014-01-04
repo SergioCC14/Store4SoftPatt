@@ -5,9 +5,11 @@
 package vista;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Articulo;
 import modelo.ModeloGlobal;
 import modelo.Pedido;
 
@@ -17,13 +19,14 @@ import modelo.Pedido;
  */
 public class ConsultarPedido extends javax.swing.JFrame {
 
+    Pedido pedido;
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
     int pedidoSel;
 
     public ConsultarPedido(int pedidoSel) {
         initComponents();
         this.pedidoSel = pedidoSel;
-        Pedido pedido = modelo.getPedidos().get(pedidoSel);
+        pedido = modelo.getPedidos().get(pedidoSel);
 
         jFormattedTextField1.setText(DateFormat.getDateInstance().format(pedido.getFecha()));
         jTextField3.setText(pedido.getId());
@@ -309,23 +312,30 @@ public class ConsultarPedido extends javax.swing.JFrame {
         } catch (Exception e) {
             fecha = new Date();
         }
-        Pedido pedido = new Pedido(fecha);
+
+        Pedido pedidoNew = new Pedido(pedido);
+        pedidoNew.setFecha(fecha);
+
+        ArrayList<Articulo> articulos = new ArrayList<>();
         if (jComboBox1.getSelectedIndex() != 0) {
-            pedido.addArticulo(modelo.getArticulos().get(jComboBox1.getSelectedIndex()-1));
+            articulos.add(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1));
         }
         if (jComboBox2.getSelectedIndex() != 0) {
-            pedido.addArticulo(modelo.getArticulos().get(jComboBox2.getSelectedIndex()-1));
+            articulos.add(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1));
         }
         if (jComboBox3.getSelectedIndex() != 0) {
-            pedido.addArticulo(modelo.getArticulos().get(jComboBox3.getSelectedIndex()-1));
+            articulos.add(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1));
         }
         if (jComboBox4.getSelectedIndex() != 0) {
-            pedido.addArticulo(modelo.getArticulos().get(jComboBox4.getSelectedIndex()-1));
+            articulos.add(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1));
         }
-        modelo.modPedido(pedidoSel, pedido);
-        modelo.sujeto.setPedido(pedido);
-        modelo.sujeto.notificarObservadores();
+        pedidoNew.setArticulos(articulos);
+
+        modelo.modPedido(pedidoSel, pedidoNew);
         JOptionPane.showMessageDialog(null, "Pedido modificado correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
+
+        modelo.sujeto.setPedido(pedidoNew);
+        modelo.sujeto.notificarObservadores();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

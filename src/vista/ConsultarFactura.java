@@ -22,6 +22,7 @@ import modelo.ModeloGlobal;
  */
 public class ConsultarFactura extends javax.swing.JFrame {
 
+    Factura factura;
     private static Servidor proxy = new Proxy(new ServidorFacturas("MiServidor"));
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
     int facturaSel;
@@ -29,7 +30,7 @@ public class ConsultarFactura extends javax.swing.JFrame {
     public ConsultarFactura(int facturaSel) {
         initComponents();
         this.facturaSel = facturaSel;
-        Factura factura = modelo.getFacturas().get(facturaSel);
+        factura = modelo.getFacturas().get(facturaSel);
 
         jFormattedTextField1.setText(DateFormat.getDateInstance().format(factura.getFecha()));
         jTextField2.setText(factura.getCliente().getNombre() + " " + factura.getCliente().getApellidos());
@@ -405,7 +406,9 @@ public class ConsultarFactura extends javax.swing.JFrame {
             fecha = new Date();
         }
         
-        Factura factura = new Factura(modelo.getFacturas().get(facturaSel).getDocumento(), jTextField1.getText());
+        Factura facturaNew = new Factura(factura);
+        facturaNew.setDocumento(factura.getDocumento());
+        facturaNew.setEstado(jTextField1.getText());
         
         ArrayList<Articulo> articulos = new ArrayList<>();
         if (jComboBox1.getSelectedIndex() != 0) {
@@ -420,10 +423,10 @@ public class ConsultarFactura extends javax.swing.JFrame {
         if (jComboBox4.getSelectedIndex() != 0) {
             articulos.add(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1));
         }
-        factura.setFecha(fecha);
-        factura.setArticulos(articulos);
+        facturaNew.setFecha(fecha);
+        facturaNew.setArticulos(articulos);
         
-        modelo.modFactura(facturaSel, factura);
+        modelo.modFactura(facturaSel, facturaNew);
         JOptionPane.showMessageDialog(null, "Factura modificada correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
 
     }//GEN-LAST:event_jButton2ActionPerformed

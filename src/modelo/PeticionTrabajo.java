@@ -21,6 +21,13 @@ public class PeticionTrabajo implements Documento {
         this.cliente = cliente;
         this.fecha = fecha;
     }
+    
+    public PeticionTrabajo(PeticionTrabajo original){
+        this.id = original.getId();
+        this.articulos = new ArrayList(original.getArticulos());
+        this.cliente = original.getCliente();
+        this.fecha = original.getFecha();
+    }
 
     @Override
     public ArrayList<Articulo> getArticulos() {

@@ -13,6 +13,11 @@ public class Presupuesto extends Decorator {
         this.horasPrevistas = horasPrevistas;
     }
 
+    public Presupuesto(Presupuesto original) {
+        super(original.getDocumento());
+        this.horasPrevistas = original.getHoras();
+    }
+    
     public int getHoras() {
         return this.horasPrevistas;
     }

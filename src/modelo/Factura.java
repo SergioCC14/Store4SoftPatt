@@ -12,6 +12,11 @@ public class Factura extends Decorator {
         super(d);
         this.estado = estado;
     }
+    
+    public Factura(Factura original){
+        super(original.getDocumento());
+        this.estado = original.getEstado();
+    }
 
     public String getEstado() {
         return this.estado;

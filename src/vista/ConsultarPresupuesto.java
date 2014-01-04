@@ -23,6 +23,7 @@ import modelo.Presupuesto;
  */
 public class ConsultarPresupuesto extends javax.swing.JFrame {
 
+    Presupuesto presupuesto;
     private static Servidor proxy = new Proxy(new ServidorFacturas("MiServidor"));
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
     int presupuestoSel;
@@ -30,7 +31,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
     public ConsultarPresupuesto(int presupuestoSel) {
         initComponents();
         this.presupuestoSel = presupuestoSel;
-        Presupuesto presupuesto = modelo.getPresupuestos().get(presupuestoSel);
+        presupuesto = modelo.getPresupuestos().get(presupuestoSel);
 
         jFormattedTextField1.setText(DateFormat.getDateInstance().format(presupuesto.getFecha()));
         jTextField2.setText(presupuesto.getCliente().getNombre() + " " + presupuesto.getCliente().getApellidos());
@@ -395,7 +396,9 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
             fecha = new Date();
         }
         
-        Presupuesto presupuesto = new Presupuesto(modelo.getPresupuestos().get(presupuestoSel).getDocumento(), Integer.parseInt(jTextField1.getText()));
+        Presupuesto presupuestoNew = new Presupuesto(presupuesto);
+        presupuestoNew.setDocumento(presupuesto.getDocumento());
+        presupuestoNew.setHoras(Integer.parseInt(jTextField1.getText()));
         
         ArrayList<Articulo> articulos = new ArrayList<>();
         if (jComboBox1.getSelectedIndex() != 0) {
@@ -410,10 +413,10 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
         if (jComboBox4.getSelectedIndex() != 0) {
             articulos.add(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1));
         }
-        presupuesto.setFecha(fecha);
-        presupuesto.setArticulos(articulos);
+        presupuestoNew.setFecha(fecha);
+        presupuestoNew.setArticulos(articulos);
         
-        modelo.modPresupuesto(presupuestoSel, presupuesto);
+        modelo.modPresupuesto(presupuestoSel, presupuestoNew);
         JOptionPane.showMessageDialog(null, "Presupuesto modificado correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
 
     }//GEN-LAST:event_jButton2ActionPerformed
