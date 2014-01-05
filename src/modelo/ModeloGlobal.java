@@ -5,6 +5,7 @@ import controladores.ObservadorConcreto;
 import controladores.Sujeto;
 import controladores.SujetoConcreto;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -28,6 +29,26 @@ public class ModeloGlobal {
 
     // constructor privado
     private ModeloGlobal() {
+        Cliente cliente1 = new Cliente("Daniel", "Martin", "123456789A", "Torrejon", "123456", 'P');
+        Cliente cliente2 = new Cliente("Sergio", "Canis", "123456789B", "Alcala", "654321", 'E');
+        this.addCliente(cliente1);
+        this.addCliente(cliente2);
+        this.addArticulo(new Articulo("Articulo1", "Descripcion1", 'N', 2.20, 1.20, "Proveedor1"));
+        this.addArticulo(new Articulo("Articulo2", "Descripcion2", 'E', 1.10, 0.10, "Proveedor3"));
+        Pedido pedido1 = new Pedido(new Date());
+        pedido1.addArticulo(this.getArticulos().get(0));
+        Pedido pedido2 = new Pedido(new Date());
+        pedido2.addArticulo(this.getArticulos().get(1));
+        this.addPedido(pedido1);
+        this.addPedido(pedido2);
+        PeticionTrabajo peticion1 = new PeticionTrabajo(cliente1, new Date());
+        peticion1.addArticulo(this.getArticulos().get(0));
+        peticion1.addArticulo(this.getArticulos().get(1));
+        Factura factura1 = new Factura(peticion1, "emitida");
+        Presupuesto presupuesto1 = new Presupuesto(peticion1, 22);
+        this.addPeticion(peticion1);
+        this.addFactura(factura1);
+        this.addPresupuesto(presupuesto1);
     }
 
     public static ModeloGlobal getInstancia() {
