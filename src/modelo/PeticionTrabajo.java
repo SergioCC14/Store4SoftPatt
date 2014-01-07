@@ -15,7 +15,7 @@ public class PeticionTrabajo implements Documento {
     private String id;
     private Date fecha;
     
-    private ArrayList<Articulo> articulos = new ArrayList<>();
+    private ArrayList<Articulo> articulos = new ArrayList();
     
     public PeticionTrabajo(Cliente cliente, Date fecha) {
         this.cliente = cliente;

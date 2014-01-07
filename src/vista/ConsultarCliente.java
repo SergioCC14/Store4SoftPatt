@@ -65,7 +65,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextField23 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonMod = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,10 +126,10 @@ public class ConsultarCliente extends javax.swing.JFrame {
         jTextField23.setEditable(false);
         jTextField23.setText("12345");
 
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMod.setText("Modificar");
+        jButtonMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonModActionPerformed(evt);
             }
         });
 
@@ -161,7 +161,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1)))
+                                    .addComponent(jButtonMod)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
@@ -218,7 +218,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 17, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonMod)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
@@ -254,10 +254,13 @@ public class ConsultarCliente extends javax.swing.JFrame {
         jRadioButton1.setSelected(false);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModActionPerformed
         char tipo = jRadioButton1.isSelected() ? 'P' : 'E';
         
+        // Hacemos copia del cliente, prototype.
         Cliente clienteNew = new Cliente(cliente);
+        
+        // Y modificamos lo que nos interese para después guardarlo.
         clienteNew.setNombre(jTextField1.getText());
         clienteNew.setApellidos(jTextField2.getText());
         clienteNew.setDni(jTextField3.getText());
@@ -267,12 +270,12 @@ public class ConsultarCliente extends javax.swing.JFrame {
         
         modelo.modCliente(clienteSel, clienteNew);
         JOptionPane.showMessageDialog(null, "Cliente modificado correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonModActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButtonMod;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -16,7 +16,7 @@ import modelo.Pedido;
 public class SujetoConcreto implements Sujeto {
 
     // Los observadores de un pedido
-    private ArrayList<Observador> observadores = new ArrayList<>();
+    private ArrayList<Observador> observadores = new ArrayList();
 
     // El pedido monitorizado
     private Pedido pedido;

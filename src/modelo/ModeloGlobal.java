@@ -13,12 +13,12 @@ import java.util.Date;
  */
 public class ModeloGlobal {
 
-    private ArrayList<Cliente> clientes = new ArrayList<>();
-    private ArrayList<Articulo> articulos = new ArrayList<>();
-    private ArrayList<Pedido> pedidos = new ArrayList<>();
-    private ArrayList<PeticionTrabajo> peticiones = new ArrayList<>();
-    private ArrayList<Presupuesto> presupuestos = new ArrayList<>();
-    private ArrayList<Factura> facturas = new ArrayList<>();
+    private ArrayList<Cliente> clientes = new ArrayList();
+    private ArrayList<Articulo> articulos = new ArrayList();
+    private ArrayList<Pedido> pedidos = new ArrayList();
+    private ArrayList<PeticionTrabajo> peticiones = new ArrayList();
+    private ArrayList<Presupuesto> presupuestos = new ArrayList();
+    private ArrayList<Factura> facturas = new ArrayList();
     public Sujeto sujeto = new SujetoConcreto();
     public Observador proveedor1 = new ObservadorConcreto("Proveedor1", sujeto);
     public Observador proveedor2 = new ObservadorConcreto("Proveedor2", sujeto);

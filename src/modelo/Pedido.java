@@ -9,7 +9,7 @@ public class Pedido {
     String id;
     Date fecha;
     
-    private ArrayList<Articulo> articulos = new ArrayList<>();
+    private ArrayList<Articulo> articulos = new ArrayList();
 
     public Pedido(Date fecha) {
         this.fecha = fecha;
