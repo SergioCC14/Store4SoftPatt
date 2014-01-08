@@ -1,5 +1,7 @@
 package vista;
 
+import controladores.FachadaSesion;
+
 /**
  *
  * @author Daniel y Sergio
@@ -85,7 +87,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel3.setText("NOTA: Para cambiar de ventana, poner usuario: Almacen, Tecnico o Coordinador y dar a Iniciar Sesión.");
+        jLabel3.setText("NOTA: Para cambiar de ventana, poner usuario: Almacen o Coordinador y dar a Iniciar Sesión.");
         jLabel3.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,11 +123,6 @@ public class InicioSesion extends javax.swing.JFrame {
         switch (jTextField1.getText().toLowerCase()) {
             case "almacen": {
                 fachada.accesoAlmacen();
-                this.dispose();
-                break;
-            }
-            case "tecnico": {
-                fachada.accesoTecnico();
                 this.dispose();
                 break;
             }

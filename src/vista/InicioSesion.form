@@ -135,7 +135,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="NOTA: Para cambiar de ventana, poner usuario: Almacen, Tecnico o Coordinador y dar a Iniciar Sesi&#xf3;n."/>
+        <Property name="text" type="java.lang.String" value="NOTA: Para cambiar de ventana, poner usuario: Almacen o Coordinador y dar a Iniciar Sesi&#xf3;n."/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>

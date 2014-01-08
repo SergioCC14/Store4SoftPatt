@@ -1,8 +1,9 @@
-package vista;
+package controladores;
 
-import sinUso.PrincipalTecnicos;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import vista.PrincipalAlmacen;
+import vista.PrincipalCoordinador;
 
 /**
  * La fachada crea un angulo de seguridad pues el usuario no accede directamente
@@ -11,11 +12,6 @@ import javax.swing.JOptionPane;
  * los subsistemas
  */
 public class FachadaSesion {
-
-    public void accesoTecnico() {
-        JFrame frameAlmacen = new PrincipalTecnicos();
-        frameAlmacen.setVisible(true);
-    }
 
     public void accesoAlmacen() {
         JFrame frameAlmacen = new PrincipalAlmacen();
