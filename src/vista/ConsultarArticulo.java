@@ -284,7 +284,7 @@ public class ConsultarArticulo extends javax.swing.JFrame {
     /**
      * Método que es llamado cuando es detectado el evento Action Performed del
      * componente jButtonBorrar. Mostramos un mensaje de confirmación para
-     * borrar el artículo, y de ser así, borramos el artículo del Modelo Global
+     * borrar el artículo, y de aceptar, borramos el artículo del Modelo Global
      * y redirigimos al Form ConsultarListaArticulosAlmacen.
      *
      * @param evt Datos sobre el evento realizado.

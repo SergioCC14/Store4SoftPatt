@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import controladores.Proxy;
@@ -13,70 +9,72 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Articulo;
-import modelo.Factura;
 import modelo.ModeloGlobal;
 import modelo.Presupuesto;
 
 /**
- *
- * @author Daniel y Sergio
+ * Clase jFrame que muestra los datos de un presupuesto seleccionado previamente
+ * en el jFrame ConsultarListaPresupuestos. Obtiene los datos de la lista de
+ * presupuestos de una instancia a la clase modelo, y los muestra, dando la
+ * opción de modificar el presupuesto, o borrarle si el usuario así lo necesita.
  */
 public class ConsultarPresupuesto extends javax.swing.JFrame {
 
-    Presupuesto presupuesto;
-    private static Servidor proxy = new Proxy(new ServidorFacturas("MiServidor"));
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
+    Presupuesto presupuesto;
     int presupuestoSel;
 
+    /**
+     * Constructor principal de la clase. Se encarga de inicializar los
+     * componentes de la interfaz y de actualizar estos con los datos aportados
+     * desde modelo por el presupuesto seleccionado en la clase
+     * ConsultarListaPresupuestos.
+     *
+     * @param presupuestoSel int que indica el número del presupuesto
+     * seleccionado en la lista de presupuestos de Modelo Global.
+     */
     public ConsultarPresupuesto(int presupuestoSel) {
         initComponents();
         this.presupuestoSel = presupuestoSel;
+
         presupuesto = modelo.getPresupuestos().get(presupuestoSel);
 
         jFormattedTextField1.setText(DateFormat.getDateInstance().format(presupuesto.getFecha()));
         jTextField2.setText(presupuesto.getCliente().getNombre() + " " + presupuesto.getCliente().getApellidos());
         jTextField3.setText(presupuesto.getId());
+        jTextField1.setText(String.valueOf(presupuesto.getHoras()));
 
         try {
-            if (presupuesto.getArticulos().get(0) != null) {
-                jComboBox1.setSelectedItem(presupuesto.getArticulos().get(0).getNombre());
-                jTextField5.setText(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1).getDescripcion());
-                jTextField6.setText(String.valueOf(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1).getCoste()));
-            }
-            if (presupuesto.getArticulos().get(1) != null) {
-                jComboBox2.setSelectedItem(presupuesto.getArticulos().get(1).getNombre());
-                jTextField9.setText(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1).getDescripcion());
-                jTextField11.setText(String.valueOf(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1).getCoste()));
-            }
-            if (presupuesto.getArticulos().get(2) != null) {
-                jComboBox3.setSelectedItem(presupuesto.getArticulos().get(2).getNombre());
-                jTextField13.setText(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1).getDescripcion());
-                jTextField15.setText(String.valueOf(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1).getCoste()));
-            }
-            if (presupuesto.getArticulos().get(3) != null) {
-                jComboBox4.setSelectedItem(presupuesto.getArticulos().get(3).getNombre());
-                jTextField17.setText(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1).getDescripcion());
-                jTextField19.setText(String.valueOf(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1).getCoste()));
-            }
+            jComboArt1.setSelectedItem(presupuesto.getArticulos().get(0).getNombre());
+            jTextArtDec1.setText(modelo.getArticulos().get(0).getDescripcion());
+            jTextArtPrec1.setText(String.valueOf(modelo.getArticulos().get(0).getCoste()));
+            jComboArt2.setSelectedItem(presupuesto.getArticulos().get(1).getNombre());
+            jTextArtDec2.setText(modelo.getArticulos().get(1).getDescripcion());
+            jTextArtPrec2.setText(String.valueOf(modelo.getArticulos().get(1).getCoste()));
+            jComboArt3.setSelectedItem(presupuesto.getArticulos().get(2).getNombre());
+            jTextArtDec3.setText(modelo.getArticulos().get(2).getDescripcion());
+            jTextArtPrec3.setText(String.valueOf(modelo.getArticulos().get(2).getCoste()));
+            jComboArt4.setSelectedItem(presupuesto.getArticulos().get(3).getNombre());
+            jTextArtDec4.setText(modelo.getArticulos().get(3).getDescripcion());
+            jTextArtPrec4.setText(String.valueOf(modelo.getArticulos().get(3).getCoste()));
         } catch (Exception e) {
         }
 
-        jTextField1.setText(String.valueOf(presupuesto.getHoras()));
-        jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
+        jTextPrecTotal.setText(String.valueOf(Double.valueOf(jTextArtPrec1.getText()) + Double.valueOf(jTextArtPrec2.getText()) + Double.valueOf(jTextArtPrec3.getText()) + Double.valueOf(jTextArtPrec4.getText())));
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Este método es llamado por el constructor para inicializar el form.
+     * PELIGRO: NO modificar este código. El contenido de este método es siempre
+     * generado por el editor del Form.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton8 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonVolver = new javax.swing.JButton();
+        jButtonBorrar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -87,48 +85,48 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jTextField19 = new javax.swing.JTextField();
-        jTextField20 = new javax.swing.JTextField();
+        jTextArtDec1 = new javax.swing.JTextField();
+        jTextArtPrec1 = new javax.swing.JTextField();
+        jTextArtDec2 = new javax.swing.JTextField();
+        jTextArtPrec2 = new javax.swing.JTextField();
+        jTextArtDec3 = new javax.swing.JTextField();
+        jTextArtPrec3 = new javax.swing.JTextField();
+        jTextArtDec4 = new javax.swing.JTextField();
+        jTextArtPrec4 = new javax.swing.JTextField();
+        jTextPrecTotal = new javax.swing.JTextField();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
-        jComboBox4 = new javax.swing.JComboBox();
+        jComboArt1 = new javax.swing.JComboBox();
+        jComboArt2 = new javax.swing.JComboBox();
+        jComboArt3 = new javax.swing.JComboBox();
+        jComboArt4 = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton8.setText("Volver");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVolver.setText("Volver");
+        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButtonVolverActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Borrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBorrar.setText("Borrar");
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonBorrarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
@@ -154,28 +152,28 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
 
         jLabel8.setText("Total");
 
-        jTextField5.setEditable(false);
+        jTextArtDec1.setEditable(false);
 
-        jTextField6.setEditable(false);
-        jTextField6.setText("0.00");
+        jTextArtPrec1.setEditable(false);
+        jTextArtPrec1.setText("0");
 
-        jTextField9.setEditable(false);
+        jTextArtDec2.setEditable(false);
 
-        jTextField11.setEditable(false);
-        jTextField11.setText("0.00");
+        jTextArtPrec2.setEditable(false);
+        jTextArtPrec2.setText("0");
 
-        jTextField13.setEditable(false);
+        jTextArtDec3.setEditable(false);
 
-        jTextField15.setEditable(false);
-        jTextField15.setText("0.00");
+        jTextArtPrec3.setEditable(false);
+        jTextArtPrec3.setText("0");
 
-        jTextField17.setEditable(false);
+        jTextArtDec4.setEditable(false);
 
-        jTextField19.setEditable(false);
-        jTextField19.setText("0.00");
+        jTextArtPrec4.setEditable(false);
+        jTextArtPrec4.setText("0");
 
-        jTextField20.setEditable(false);
-        jTextField20.setText("0.00");
+        jTextPrecTotal.setEditable(false);
+        jTextPrecTotal.setText("0");
 
         jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
         jFormattedTextField1.setText("24-01-2014");
@@ -190,31 +188,31 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
 
         jLabel13.setText("€");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Articulo1", "Articulo2" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jComboArt1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Articulo1", "Articulo2" }));
+        jComboArt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboArt1ActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Articulo1", "Articulo2" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jComboArt2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Articulo1", "Articulo2" }));
+        jComboArt2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jComboArt2ActionPerformed(evt);
             }
         });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Articulo1", "Articulo2" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        jComboArt3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Articulo1", "Articulo2" }));
+        jComboArt3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                jComboArt3ActionPerformed(evt);
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Articulo1", "Articulo2" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        jComboArt4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Articulo1", "Articulo2" }));
+        jComboArt4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                jComboArt4ActionPerformed(evt);
             }
         });
 
@@ -238,11 +236,11 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jComboArt1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextArtDec1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextArtPrec1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -257,27 +255,27 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jComboArt2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTextArtDec2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(jTextArtPrec2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jComboArt3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTextArtDec3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(jTextArtPrec3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jComboArt4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTextArtDec4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(jTextArtPrec4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel8)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jTextPrecTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 8, Short.MAX_VALUE)
@@ -286,9 +284,9 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(19, 19, 19)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -328,9 +326,9 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(jButtonBorrar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -339,32 +337,32 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                                 .addComponent(jLabel6)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtDec1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtPrec1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboArt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtDec2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtPrec2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboArt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtDec3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtPrec3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboArt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtDec4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArtPrec4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jComboArt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVolver)
+                    .addComponent(jTextPrecTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel8))
                 .addContainerGap())
@@ -373,102 +371,163 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    /**
+     * Método que es llamado cuando es detectado el evento Action Performed del
+     * componente jButtonVolver. Creamos el jFrame ConsultarListaPresupuestos,
+     * lo hacemos visible y cerramos el jFrame actual.
+     *
+     * @param evt Datos sobre el evento realizado.
+     */
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         JFrame frame = new ConsultarListaPresupuestos();
         frame.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButtonVolverActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Método que es llamado cuando es detectado el evento Action Performed del
+     * componente jButtonBorrar. Mostramos un mensaje de confirmación para
+     * borrar el presupuesto, y de aceptar, borramos el presupuesto del Modelo
+     * Global y redirigimos al Form ConsultarListaPresupuestos.
+     *
+     * @param evt Datos sobre el evento realizado.
+     */
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
         if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "¿Seguro que quiere borrar?.", "Confirmar", JOptionPane.YES_NO_OPTION)) {
             modelo.removePresupuesto(presupuestoSel);
             JFrame frame = new ConsultarListaPresupuestos();
             frame.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /**
+     * Método que es llamado cuando es detectado el evento Action Performed del
+     * componente jButtonModificar. En él, recogemos los datos del Form y
+     * mediante el uso del patrón Prototype, actualizamos el presupuesto
+     * seleccionado en el Modelo Global que usamos en la aplicación.
+     *
+     * @param evt Datos sobre el evento realizado.
+     */
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         Date fecha;
         try {
             fecha = DateFormat.getDateInstance().parse(jFormattedTextField1.getText());
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fecha no válida. Usaremos la fecha actual.", "Error", JOptionPane.DEFAULT_OPTION);
             fecha = new Date();
         }
-        
+
+        // Aplicamos patrón prototype generando una copia del original.
         Presupuesto presupuestoNew = new Presupuesto(presupuesto);
+
+        // Modificamos la copia con los nuevos datos del Form.
         presupuestoNew.setDocumento(presupuesto.getDocumento());
         presupuestoNew.setHoras(Integer.parseInt(jTextField1.getText()));
-        
-        ArrayList<Articulo> articulos = new ArrayList<>();
-        if (jComboBox1.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1));
-        }
-        if (jComboBox2.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1));
-        }
-        if (jComboBox3.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1));
-        }
-        if (jComboBox4.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1));
-        }
         presupuestoNew.setFecha(fecha);
+
+        ArrayList<Articulo> articulos = new ArrayList<>();
+        if (jComboArt1.getSelectedIndex() != 0) {
+            articulos.add(modelo.getArticulos().get(jComboArt1.getSelectedIndex() - 1));
+        }
+        if (jComboArt2.getSelectedIndex() != 0) {
+            articulos.add(modelo.getArticulos().get(jComboArt2.getSelectedIndex() - 1));
+        }
+        if (jComboArt3.getSelectedIndex() != 0) {
+            articulos.add(modelo.getArticulos().get(jComboArt3.getSelectedIndex() - 1));
+        }
+        if (jComboArt4.getSelectedIndex() != 0) {
+            articulos.add(modelo.getArticulos().get(jComboArt4.getSelectedIndex() - 1));
+        }
         presupuestoNew.setArticulos(articulos);
-        
+
+        // Actualizamos el presupuesto original en Modelo Global con el presupuesto
+        // copiado y modificado previamente.
         modelo.modPresupuesto(presupuestoSel, presupuestoNew);
         JOptionPane.showMessageDialog(null, "Presupuesto modificado correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        if (jComboBox1.getSelectedIndex() == 0) {
-            jTextField6.setText("0.00");
+    /**
+     * Método que es llamado cuando es detectado el evento Action Performed del
+     * componente jComboArt1. Al seleccionar un artículo, el método actualiza la
+     * descripción y precio de este, además del precio total.
+     *
+     * @param evt Datos sobre el evento realizado.
+     */
+    private void jComboArt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArt1ActionPerformed
+        if (jComboArt1.getSelectedIndex() == 0) {
+            jTextArtDec1.setText("");
+            jTextArtPrec1.setText("0");
         } else {
-            jTextField5.setText(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1).getDescripcion());
-            jTextField6.setText(String.valueOf(modelo.getArticulos().get(jComboBox1.getSelectedIndex() - 1).getCoste()));
+            jTextArtDec1.setText(modelo.getArticulos().get(jComboArt1.getSelectedIndex() - 1).getDescripcion());
+            jTextArtPrec1.setText(String.valueOf(modelo.getArticulos().get(jComboArt1.getSelectedIndex() - 1).getCoste()));
         }
-        jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        jTextPrecTotal.setText(String.valueOf(Double.valueOf(jTextArtPrec1.getText()) + Double.valueOf(jTextArtPrec2.getText()) + Double.valueOf(jTextArtPrec3.getText()) + Double.valueOf(jTextArtPrec4.getText())));
+    }//GEN-LAST:event_jComboArt1ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        if (jComboBox2.getSelectedIndex() == 0) {
-            jTextField11.setText("0.00");
+    /**
+     * Método que es llamado cuando es detectado el evento Action Performed del
+     * componente jComboArt2. Al seleccionar un artículo, el método actualiza la
+     * descripción y precio de este, además del precio total.
+     *
+     * @param evt Datos sobre el evento realizado.
+     */
+    private void jComboArt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArt2ActionPerformed
+        if (jComboArt2.getSelectedIndex() == 0) {
+            jTextArtDec1.setText("");
+            jTextArtPrec2.setText("0");
         } else {
-            jTextField9.setText(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1).getDescripcion());
-            jTextField11.setText(String.valueOf(modelo.getArticulos().get(jComboBox2.getSelectedIndex() - 1).getCoste()));
+            jTextArtDec2.setText(modelo.getArticulos().get(jComboArt2.getSelectedIndex() - 1).getDescripcion());
+            jTextArtPrec2.setText(String.valueOf(modelo.getArticulos().get(jComboArt2.getSelectedIndex() - 1).getCoste()));
         }
-        jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+        jTextPrecTotal.setText(String.valueOf(Double.valueOf(jTextArtPrec1.getText()) + Double.valueOf(jTextArtPrec2.getText()) + Double.valueOf(jTextArtPrec3.getText()) + Double.valueOf(jTextArtPrec4.getText())));
+    }//GEN-LAST:event_jComboArt2ActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        if (jComboBox3.getSelectedIndex() == 0) {
-            jTextField15.setText("0.00");
+    /**
+     * Método que es llamado cuando es detectado el evento Action Performed del
+     * componente jComboArt3. Al seleccionar un artículo, el método actualiza la
+     * descripción y precio de este, además del precio total.
+     *
+     * @param evt Datos sobre el evento realizado.
+     */
+    private void jComboArt3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArt3ActionPerformed
+        if (jComboArt3.getSelectedIndex() == 0) {
+            jTextArtDec1.setText("");
+            jTextArtPrec3.setText("0");
         } else {
-            jTextField13.setText(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1).getDescripcion());
-            jTextField15.setText(String.valueOf(modelo.getArticulos().get(jComboBox3.getSelectedIndex() - 1).getCoste()));
+            jTextArtDec3.setText(modelo.getArticulos().get(jComboArt3.getSelectedIndex() - 1).getDescripcion());
+            jTextArtPrec3.setText(String.valueOf(modelo.getArticulos().get(jComboArt3.getSelectedIndex() - 1).getCoste()));
         }
-        jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+        jTextPrecTotal.setText(String.valueOf(Double.valueOf(jTextArtPrec1.getText()) + Double.valueOf(jTextArtPrec2.getText()) + Double.valueOf(jTextArtPrec3.getText()) + Double.valueOf(jTextArtPrec4.getText())));
+    }//GEN-LAST:event_jComboArt3ActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        if (jComboBox4.getSelectedIndex() == 0) {
-            jTextField19.setText("0.00");
+    /**
+     * Método que es llamado cuando es detectado el evento Action Performed del
+     * componente jComboArt4. Al seleccionar un artículo, el método actualiza la
+     * descripción y precio de este, además del precio total.
+     *
+     * @param evt Datos sobre el evento realizado.
+     */
+    private void jComboArt4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArt4ActionPerformed
+        if (jComboArt4.getSelectedIndex() == 0) {
+            jTextArtDec1.setText("");
+            jTextArtPrec4.setText("0");
         } else {
-            jTextField17.setText(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1).getDescripcion());
-            jTextField19.setText(String.valueOf(modelo.getArticulos().get(jComboBox4.getSelectedIndex() - 1).getCoste()));
+            jTextArtDec4.setText(modelo.getArticulos().get(jComboArt4.getSelectedIndex() - 1).getDescripcion());
+            jTextArtPrec4.setText(String.valueOf(modelo.getArticulos().get(jComboArt4.getSelectedIndex() - 1).getCoste()));
         }
-        jTextField20.setText(String.valueOf(Double.parseDouble(jTextField6.getText()) + Double.parseDouble(jTextField11.getText()) + Double.parseDouble(jTextField15.getText()) + Double.parseDouble(jTextField19.getText())));
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+        jTextPrecTotal.setText(String.valueOf(Double.valueOf(jTextArtPrec1.getText()) + Double.valueOf(jTextArtPrec2.getText()) + Double.valueOf(jTextArtPrec3.getText()) + Double.valueOf(jTextArtPrec4.getText())));
+    }//GEN-LAST:event_jComboArt4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JButton jButtonBorrar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonVolver;
+    private javax.swing.JComboBox jComboArt1;
+    private javax.swing.JComboBox jComboArt2;
+    private javax.swing.JComboBox jComboArt3;
+    private javax.swing.JComboBox jComboArt4;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -484,17 +543,17 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTextArtDec1;
+    private javax.swing.JTextField jTextArtDec2;
+    private javax.swing.JTextField jTextArtDec3;
+    private javax.swing.JTextField jTextArtDec4;
+    private javax.swing.JTextField jTextArtPrec1;
+    private javax.swing.JTextField jTextArtPrec2;
+    private javax.swing.JTextField jTextArtPrec3;
+    private javax.swing.JTextField jTextArtPrec4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextPrecTotal;
     // End of variables declaration//GEN-END:variables
 }
