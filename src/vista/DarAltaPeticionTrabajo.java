@@ -1,63 +1,29 @@
 package vista;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import modelo.Articulo;
+import modelo.Factura;
 import modelo.ModeloGlobal;
+import modelo.PeticionTrabajo;
 import modelo.Presupuesto;
 
 /**
- * Clase jFrame que muestra los datos de un presupuesto seleccionado previamente
- * en el jFrame ConsultarListaPresupuestos. Obtiene los datos de la lista de
- * presupuestos de una instancia a la clase modelo, y los muestra, dando la
- * opción de modificar el presupuesto, o borrarle si el usuario así lo necesita.
+ * Clase jFrame que muestra un formulario para dar de alta en modelo una
+ * Petición de trabajo. Obtiene los datos del Form y al darle a guardar crea un
+ * nuevo objeto en la instancia modelo.
  */
-public class ConsultarPresupuesto extends javax.swing.JFrame {
+public class DarAltaPeticionTrabajo extends javax.swing.JFrame {
 
     ModeloGlobal modelo = ModeloGlobal.getInstancia();
-    Presupuesto presupuesto;
-    int presupuestoSel;
 
     /**
      * Constructor principal de la clase. Se encarga de inicializar los
-     * componentes de la interfaz y de actualizar estos con los datos aportados
-     * desde modelo por el presupuesto seleccionado en la clase
-     * ConsultarListaPresupuestos.
-     *
-     * @param presupuestoSel int que indica el número del presupuesto
-     * seleccionado en la lista de presupuestos de Modelo Global.
+     * componentes de la interfaz.
      */
-    public ConsultarPresupuesto(int presupuestoSel) {
+    public DarAltaPeticionTrabajo() {
         initComponents();
-        this.presupuestoSel = presupuestoSel;
-
-        presupuesto = modelo.getPresupuestos().get(presupuestoSel);
-
-        jFormattedTextField1.setText(DateFormat.getDateInstance().format(presupuesto.getFecha()));
-        jTextField2.setText(presupuesto.getCliente().getNombre() + " " + presupuesto.getCliente().getApellidos());
-        jTextField3.setText(presupuesto.getId());
-        jTextField1.setText(String.valueOf(presupuesto.getHoras()));
-
-        try {
-            jComboArt1.setSelectedItem(presupuesto.getArticulos().get(0).getNombre());
-            jTextArtDec1.setText(modelo.getArticulos().get(0).getDescripcion());
-            jTextArtPrec1.setText(String.valueOf(modelo.getArticulos().get(0).getCoste()));
-            jComboArt2.setSelectedItem(presupuesto.getArticulos().get(1).getNombre());
-            jTextArtDec2.setText(modelo.getArticulos().get(1).getDescripcion());
-            jTextArtPrec2.setText(String.valueOf(modelo.getArticulos().get(1).getCoste()));
-            jComboArt3.setSelectedItem(presupuesto.getArticulos().get(2).getNombre());
-            jTextArtDec3.setText(modelo.getArticulos().get(2).getDescripcion());
-            jTextArtPrec3.setText(String.valueOf(modelo.getArticulos().get(2).getCoste()));
-            jComboArt4.setSelectedItem(presupuesto.getArticulos().get(3).getNombre());
-            jTextArtDec4.setText(modelo.getArticulos().get(3).getDescripcion());
-            jTextArtPrec4.setText(String.valueOf(modelo.getArticulos().get(3).getCoste()));
-        } catch (Exception e) {
-        }
-
-        jTextPrecTotal.setText(String.valueOf(Double.valueOf(jTextArtPrec1.getText()) + Double.valueOf(jTextArtPrec2.getText()) + Double.valueOf(jTextArtPrec3.getText()) + Double.valueOf(jTextArtPrec4.getText())));
     }
 
     /**
@@ -70,8 +36,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonVolver = new javax.swing.JButton();
-        jButtonBorrar = new javax.swing.JButton();
-        jButtonModificar = new javax.swing.JButton();
+        jButtonGuardar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -101,8 +66,6 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
         jComboArt2 = new javax.swing.JComboBox();
         jComboArt3 = new javax.swing.JComboBox();
         jComboArt4 = new javax.swing.JComboBox();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,17 +76,10 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
             }
         });
 
-        jButtonBorrar.setText("Borrar");
-        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBorrarActionPerformed(evt);
-            }
-        });
-
-        jButtonModificar.setText("Modificar");
-        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModificarActionPerformed(evt);
+                jButtonGuardarActionPerformed(evt);
             }
         });
 
@@ -137,7 +93,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
         jTextField3.setEditable(false);
         jTextField3.setText("1234567890");
 
-        jLabel1.setText("Nº Factura:");
+        jLabel1.setText("Nº Peticion:");
 
         jLabel4.setText("Listado Artículos:");
 
@@ -173,7 +129,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
         jTextPrecTotal.setText("0");
 
         jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jFormattedTextField1.setText("24-01-2014");
+        jFormattedTextField1.setText("09-ene-2013");
 
         jLabel9.setText("€");
 
@@ -212,10 +168,6 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                 jComboArt4ActionPerformed(evt);
             }
         });
-
-        jLabel14.setText("Horas Previstas:");
-
-        jTextField1.setText("22");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,15 +227,14 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                                                 .addComponent(jTextPrecTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 8, Short.MAX_VALUE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 12, Short.MAX_VALUE)
                                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(19, 19, 19)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButtonVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -294,10 +245,6 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                                     .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                                     .addComponent(jTextField2)
                                     .addComponent(jFormattedTextField1))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -307,9 +254,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,48 +266,42 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jButtonModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonBorrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextArtDec1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextArtPrec1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(jComboArt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextArtDec2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextArtPrec2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(jComboArt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextArtDec3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextArtPrec3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)
-                            .addComponent(jComboArt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextArtDec4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextArtPrec4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)
-                            .addComponent(jComboArt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextArtDec1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextArtPrec1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jComboArt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextArtDec2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextArtPrec2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jComboArt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextArtDec3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextArtPrec3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jComboArt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextArtDec4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextArtPrec4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(jComboArt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVolver)
                     .addComponent(jTextPrecTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel8))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -370,43 +309,28 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
 
     /**
      * Método que es llamado cuando es detectado el evento Action Performed del
-     * componente jButtonVolver. Creamos el jFrame ConsultarListaPresupuestos,
-     * lo hacemos visible y cerramos el jFrame actual.
+     * componente jButtonVolver. Creamos el jFrame
+     * ConsultarListaPeticionesTrabajo, lo hacemos visible y cerramos el jFrame
+     * actual.
      *
      * @param evt Datos sobre el evento realizado.
      */
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
-        JFrame frame = new ConsultarListaPresupuestos();
+        JFrame frame = new ConsultarListaPeticionesTrabajo();
         frame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
     /**
      * Método que es llamado cuando es detectado el evento Action Performed del
-     * componente jButtonBorrar. Mostramos un mensaje de confirmación para
-     * borrar el presupuesto, y de aceptar, borramos el presupuesto del Modelo
-     * Global y redirigimos al Form ConsultarListaPresupuestos.
+     * componente jButtonGuardar. En él, recogemos los datos del Form y creamos
+     * un nuevo objeto PeticionTrabajo que guardamos en una instancia de
+     * ModeloGlobal. En este caso además creamos un presupuesto y factura
+     * acorde.
      *
      * @param evt Datos sobre el evento realizado.
      */
-    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-        if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "¿Seguro que quiere borrar?.", "Confirmar", JOptionPane.YES_NO_OPTION)) {
-            modelo.removePresupuesto(presupuestoSel);
-            JFrame frame = new ConsultarListaPresupuestos();
-            frame.setVisible(true);
-            this.dispose();
-        }
-    }//GEN-LAST:event_jButtonBorrarActionPerformed
-
-    /**
-     * Método que es llamado cuando es detectado el evento Action Performed del
-     * componente jButtonModificar. En él, recogemos los datos del Form y
-     * mediante el uso del patrón Prototype, actualizamos el presupuesto
-     * seleccionado en el Modelo Global que usamos en la aplicación.
-     *
-     * @param evt Datos sobre el evento realizado.
-     */
-    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         Date fecha;
         try {
             fecha = DateFormat.getDateInstance().parse(jFormattedTextField1.getText());
@@ -415,35 +339,31 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
             fecha = new Date();
         }
 
-        // Aplicamos patrón prototype generando una copia del original.
-        Presupuesto presupuestoNew = new Presupuesto(presupuesto);
+        // Creamos el objeto que vamos a guardar.
+        PeticionTrabajo peticion = new PeticionTrabajo(modelo.getClientes().get(0), fecha);
 
-        // Modificamos la copia con los nuevos datos del Form.
-        presupuestoNew.setDocumento(presupuesto.getDocumento());
-        presupuestoNew.setHoras(Integer.parseInt(jTextField1.getText()));
-        presupuestoNew.setFecha(fecha);
-
-        ArrayList<Articulo> articulos = new ArrayList<>();
+        // Añadimos los artículos seleccionados.
         if (jComboArt1.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboArt1.getSelectedIndex() - 1));
+            peticion.addArticulo(modelo.getArticulos().get(jComboArt1.getSelectedIndex()-1));
         }
         if (jComboArt2.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboArt2.getSelectedIndex() - 1));
+            peticion.addArticulo(modelo.getArticulos().get(jComboArt2.getSelectedIndex()-1));
         }
         if (jComboArt3.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboArt3.getSelectedIndex() - 1));
+            peticion.addArticulo(modelo.getArticulos().get(jComboArt3.getSelectedIndex()-1));
         }
         if (jComboArt4.getSelectedIndex() != 0) {
-            articulos.add(modelo.getArticulos().get(jComboArt4.getSelectedIndex() - 1));
+            peticion.addArticulo(modelo.getArticulos().get(jComboArt4.getSelectedIndex()-1));
         }
-        presupuestoNew.setArticulos(articulos);
 
-        // Actualizamos el presupuesto original en Modelo Global con el presupuesto
-        // copiado y modificado previamente.
-        modelo.modPresupuesto(presupuestoSel, presupuestoNew);
-        JOptionPane.showMessageDialog(null, "Presupuesto modificado correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
+        // Guardamos la petición y creamos la factura y presupuesto acorde a los
+        // datos introducidos, guardandolos también en modelo.
+        modelo.addPeticion(peticion);
+        modelo.addFactura(new Factura(peticion, "Pendiente"));
+        modelo.addPresupuesto(new Presupuesto(peticion, 10));
 
-    }//GEN-LAST:event_jButtonModificarActionPerformed
+        JOptionPane.showMessageDialog(null, "Petición añadida correctamente.", "Correcto", JOptionPane.DEFAULT_OPTION);
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     /**
      * Método que es llamado cuando es detectado el evento Action Performed del
@@ -472,7 +392,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
      */
     private void jComboArt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArt2ActionPerformed
         if (jComboArt2.getSelectedIndex() == 0) {
-            jTextArtDec1.setText("");
+            jTextArtDec2.setText("");
             jTextArtPrec2.setText("0");
         } else {
             jTextArtDec2.setText(modelo.getArticulos().get(jComboArt2.getSelectedIndex() - 1).getDescripcion());
@@ -490,7 +410,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
      */
     private void jComboArt3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArt3ActionPerformed
         if (jComboArt3.getSelectedIndex() == 0) {
-            jTextArtDec1.setText("");
+            jTextArtDec3.setText("");
             jTextArtPrec3.setText("0");
         } else {
             jTextArtDec3.setText(modelo.getArticulos().get(jComboArt3.getSelectedIndex() - 1).getDescripcion());
@@ -508,7 +428,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
      */
     private void jComboArt4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArt4ActionPerformed
         if (jComboArt4.getSelectedIndex() == 0) {
-            jTextArtDec1.setText("");
+            jTextArtDec4.setText("");
             jTextArtPrec4.setText("0");
         } else {
             jTextArtDec4.setText(modelo.getArticulos().get(jComboArt4.getSelectedIndex() - 1).getDescripcion());
@@ -518,8 +438,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboArt4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBorrar;
-    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JComboBox jComboArt1;
     private javax.swing.JComboBox jComboArt2;
@@ -531,7 +450,6 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -548,7 +466,6 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextArtPrec2;
     private javax.swing.JTextField jTextArtPrec3;
     private javax.swing.JTextField jTextArtPrec4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextPrecTotal;
