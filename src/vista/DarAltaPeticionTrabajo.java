@@ -24,6 +24,7 @@ public class DarAltaPeticionTrabajo extends javax.swing.JFrame {
      */
     public DarAltaPeticionTrabajo() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -68,6 +69,8 @@ public class DarAltaPeticionTrabajo extends javax.swing.JFrame {
         jComboArt4 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Dar Alta Petición de Trabajo");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

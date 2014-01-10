@@ -33,6 +33,7 @@ public class ConsultarPeticionTrabajo extends javax.swing.JFrame {
      */
     public ConsultarPeticionTrabajo(int peticionSel) {
         initComponents();
+        setLocationRelativeTo(null);
         this.peticionSel = peticionSel;
 
         peticion = modelo.getPeticiones().get(peticionSel);
@@ -103,6 +104,8 @@ public class ConsultarPeticionTrabajo extends javax.swing.JFrame {
         jComboArt4 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Petición de Trabajo");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

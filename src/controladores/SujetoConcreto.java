@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controladores;
 
 import java.util.ArrayList;
@@ -10,27 +5,40 @@ import javax.swing.JOptionPane;
 import modelo.Pedido;
 
 /**
- *
- * @author Daniel
+ * Clase que define un SujetoConcreto, a partir de un Sujeto Interfaz. Que será
+ * el encargado de manejar una lista de observadores y de avisarlos ante
+ * posibles añadidos o cambios en la lista de Pedidos de la aplicacion para que
+ * actuen en consecuencia.
  */
 public class SujetoConcreto implements Sujeto {
 
-    // Los observadores de un pedido
     private ArrayList<Observador> observadores = new ArrayList();
-
-    // El pedido monitorizado
     private Pedido pedido;
 
+    /**
+     * Establecemos el Pedido que es monitorizado.
+     *
+     * @param pedido Pedido que queremos monitorizar.
+     */
     @Override
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
 
+    /**
+     * @return Pedido que estamos monitorizando
+     */
     @Override
     public Pedido getPedido() {
         return this.pedido;
     }
 
+    /**
+     * Añadimos el Observador indicado a la lista de Observadores para que sea
+     * avisado.
+     *
+     * @param o Observador que se desea añadir a la lista.
+     */
     @Override
     public void addObservador(Observador o) {
         if (observadores.contains(o) == false) {
@@ -38,11 +46,21 @@ public class SujetoConcreto implements Sujeto {
         }
     }
 
+    /**
+     * Eliminamos el observador indicado de la lista de Observadores.
+     *
+     * @param o Observador que deseamos eliminar de la lista.
+     */
     @Override
     public void removeObservador(Observador o) {
         observadores.remove(o);
     }
 
+    /**
+     * Notificamos a todos los Observadores de la lista de que se han producido
+     * un añadido o cambio en el pedido monitorizado, para que actuén según se
+     * les indique y sepan si tienen que realizar envíos.
+     */
     @Override
     public void notificarObservadores() {
         // Pasamos el vector a un array para evitar los conflictos

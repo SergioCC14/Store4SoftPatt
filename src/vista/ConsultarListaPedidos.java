@@ -23,6 +23,8 @@ public class ConsultarListaPedidos extends javax.swing.JFrame {
      */
     public ConsultarListaPedidos() {
         initComponents();
+        setLocationRelativeTo(null);
+        
         String[] cn = {"Fecha", "numArticulos", "id", "coste"};
         DefaultTableModel model = new DefaultTableModel();
         jTable.setModel(model);
@@ -48,6 +50,8 @@ public class ConsultarListaPedidos extends javax.swing.JFrame {
         jButtonConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Lista Pedidos");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

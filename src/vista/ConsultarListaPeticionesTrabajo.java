@@ -23,6 +23,7 @@ public class ConsultarListaPeticionesTrabajo extends javax.swing.JFrame {
      */
     public ConsultarListaPeticionesTrabajo() {
         initComponents();
+        setLocationRelativeTo(null);
 
         String[] cn = {"DNI", "Nombre", "Fecha", "Precio", "Articulos"};
         DefaultTableModel model = new DefaultTableModel();
@@ -49,6 +50,8 @@ public class ConsultarListaPeticionesTrabajo extends javax.swing.JFrame {
         jButtonConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Lista Peticiones");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

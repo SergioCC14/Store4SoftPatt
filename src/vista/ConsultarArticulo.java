@@ -28,6 +28,7 @@ public class ConsultarArticulo extends javax.swing.JFrame {
      */
     public ConsultarArticulo(int articuloSel) {
         initComponents();
+        setLocationRelativeTo(null);
         this.articuloSel = articuloSel;
 
         articulo = modelo.getArticulos().get(articuloSel);
@@ -78,6 +79,8 @@ public class ConsultarArticulo extends javax.swing.JFrame {
         jButtonBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Artículo");
+        setResizable(false);
 
         jLabel1.setText("€");
 

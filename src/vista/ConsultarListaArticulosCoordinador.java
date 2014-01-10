@@ -28,6 +28,7 @@ public class ConsultarListaArticulosCoordinador extends javax.swing.JFrame {
      */
     public ConsultarListaArticulosCoordinador() {
         initComponents();
+        setLocationRelativeTo(null);
 
         String[] cn = {"Nombre", "Descripcion", "Tipo", "Precio", "Coste", "Proveedor"};
         model = new DefaultTableModel();
@@ -55,6 +56,8 @@ public class ConsultarListaArticulosCoordinador extends javax.swing.JFrame {
         jButtonSortProvee = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Lista Artículos");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

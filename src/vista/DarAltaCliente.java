@@ -20,6 +20,7 @@ public class DarAltaCliente extends javax.swing.JFrame {
      */
     public DarAltaCliente() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -51,6 +52,8 @@ public class DarAltaCliente extends javax.swing.JFrame {
         jTextField23 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Dar Alta Cliente");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

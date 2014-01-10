@@ -20,6 +20,7 @@ public class DarAltaArticulo extends javax.swing.JFrame {
      */
     public DarAltaArticulo() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -54,6 +55,8 @@ public class DarAltaArticulo extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Dar Alta Artículo");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

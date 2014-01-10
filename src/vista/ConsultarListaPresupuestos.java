@@ -22,6 +22,7 @@ public class ConsultarListaPresupuestos extends javax.swing.JFrame {
      */
     public ConsultarListaPresupuestos() {
         initComponents();
+        setLocationRelativeTo(null);
 
         String[] cn = {"DNI", "Nombre", "Fecha", "Precio", "Articulos", "H. Previstas"};
         DefaultTableModel model = new DefaultTableModel();
@@ -47,6 +48,8 @@ public class ConsultarListaPresupuestos extends javax.swing.JFrame {
         jButtonConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Lista Presupuestos");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

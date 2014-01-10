@@ -1,6 +1,7 @@
 package vista;
 
 import controladores.FachadaSesion;
+import modelo.ModeloGlobal;
 
 /**
  * Clase jFrame principal que muestra un formulario para el inicio de sesión en
@@ -11,12 +12,19 @@ import controladores.FachadaSesion;
  */
 public class InicioSesion extends javax.swing.JFrame {
 
+    
     /**
      * Constructor principal de la clase. Se encarga de inicializar los
      * componentes de la interfaz.
      */
     public InicioSesion() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        // Aunque por defecto se inicializa al ser Singleton, iniciamos una 
+        // instancia de ModeloGlobal para inicializar los datos al iniciar el
+        // programa (Requisito del proyecto).
+        ModeloGlobal modelo = ModeloGlobal.getInstancia();
     }
 
     /**
@@ -37,7 +45,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gestión Store4SoftPatt");
+        setTitle("Store4SoftPatt - Iniciar Sesión");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());

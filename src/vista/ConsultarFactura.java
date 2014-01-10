@@ -36,6 +36,7 @@ public class ConsultarFactura extends javax.swing.JFrame {
      */
     public ConsultarFactura(int facturaSel) {
         initComponents();
+        setLocationRelativeTo(null);
         this.facturaSel = facturaSel;
 
         factura = modelo.getFacturas().get(facturaSel);
@@ -110,6 +111,8 @@ public class ConsultarFactura extends javax.swing.JFrame {
         jButtonEmitir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Factura");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

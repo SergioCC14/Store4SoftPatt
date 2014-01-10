@@ -30,6 +30,7 @@ public class ConsultarListaClientes extends javax.swing.JFrame {
      */
     public ConsultarListaClientes() {
         initComponents();
+        setLocationRelativeTo(null);
 
         String[] cn = {"Nombre", "Apellidos", "Dni", "Direccion", "Telefono", "Tipo"};
         model = new DefaultTableModel();
@@ -60,6 +61,8 @@ public class ConsultarListaClientes extends javax.swing.JFrame {
         jButtonSortDni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Lista Clientes");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

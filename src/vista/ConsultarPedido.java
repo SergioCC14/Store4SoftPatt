@@ -32,6 +32,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
      */
     public ConsultarPedido(int pedidoSel) {
         initComponents();
+        setLocationRelativeTo(null);
         this.pedidoSel = pedidoSel;
 
         pedido = modelo.getPedidos().get(pedidoSel);
@@ -89,6 +90,8 @@ public class ConsultarPedido extends javax.swing.JFrame {
         jButtonBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Pedido");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

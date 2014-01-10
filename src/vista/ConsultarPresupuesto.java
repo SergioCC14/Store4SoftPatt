@@ -32,6 +32,7 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
      */
     public ConsultarPresupuesto(int presupuestoSel) {
         initComponents();
+        setLocationRelativeTo(null);
         this.presupuestoSel = presupuestoSel;
 
         presupuesto = modelo.getPresupuestos().get(presupuestoSel);
@@ -105,6 +106,8 @@ public class ConsultarPresupuesto extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Presupuesto");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

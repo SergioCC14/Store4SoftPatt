@@ -15,6 +15,7 @@ public class PrincipalCoordinador extends javax.swing.JFrame {
      */
     public PrincipalCoordinador() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -34,6 +35,8 @@ public class PrincipalCoordinador extends javax.swing.JFrame {
         jButtonCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Menú Principal");
+        setResizable(false);
 
         jButtonFacturas.setText("Facturación");
         jButtonFacturas.addActionListener(new java.awt.event.ActionListener() {

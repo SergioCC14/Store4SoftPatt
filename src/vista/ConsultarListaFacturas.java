@@ -22,6 +22,8 @@ public class ConsultarListaFacturas extends javax.swing.JFrame {
      */
     public ConsultarListaFacturas() {
         initComponents();
+        setLocationRelativeTo(null);
+        
         String[] cn = {"DNI", "Nombre", "Fecha", "Precio", "Articulos", "Emitida"};
         DefaultTableModel model = new DefaultTableModel();
         jTable1.setModel(model);
@@ -46,6 +48,8 @@ public class ConsultarListaFacturas extends javax.swing.JFrame {
         jButtonConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Lista Facturas");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

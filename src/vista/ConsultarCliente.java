@@ -28,6 +28,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
      */
     public ConsultarCliente(int clienteSel) {
         initComponents();
+        setLocationRelativeTo(null);
         this.clienteSel = clienteSel;
 
         cliente = modelo.getClientes().get(clienteSel);
@@ -75,6 +76,8 @@ public class ConsultarCliente extends javax.swing.JFrame {
         jButtonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Consultar Cliente");
+        setResizable(false);
 
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {

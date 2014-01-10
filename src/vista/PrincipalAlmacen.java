@@ -15,6 +15,7 @@ public class PrincipalAlmacen extends javax.swing.JFrame {
      */
     public PrincipalAlmacen() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -31,7 +32,9 @@ public class PrincipalAlmacen extends javax.swing.JFrame {
         jButtonCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store4SoftPatt - Menú Principal");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         jButtonArticulos.setText("Artículos");
         jButtonArticulos.addActionListener(new java.awt.event.ActionListener() {
