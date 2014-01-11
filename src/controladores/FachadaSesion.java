@@ -6,9 +6,9 @@ import vista.PrincipalAlmacen;
 import vista.PrincipalCoordinador;
 
 /**
- * La fachada crea un angulo de seguridad pues el usuario no accede directamente
- * a su sección, si no que es llevado previamente a la fachada que le
- * redirecciona al menu principal que corresponde a ese usuario. Simplificando
+ * La fachada crea un ángulo de seguridad pues el usuario no accede directamente
+ * a su sección, sino que es llevado previamente a la fachada que le
+ * redirecciona al menú principal que corresponde a ese usuario. Simplificando
  * los subsistemas.
  */
 public class FachadaSesion {

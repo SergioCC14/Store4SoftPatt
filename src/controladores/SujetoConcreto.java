@@ -7,8 +7,8 @@ import modelo.Pedido;
 /**
  * Clase que define un SujetoConcreto, a partir de un Sujeto Interfaz. Que será
  * el encargado de manejar una lista de observadores y de avisarlos ante
- * posibles añadidos o cambios en la lista de Pedidos de la aplicacion para que
- * actuen en consecuencia.
+ * posibles añadidos o cambios en la lista de Pedidos de la aplicación para que
+ * actúen en consecuencia.
  */
 public class SujetoConcreto implements Sujeto {
 

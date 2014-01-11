@@ -7,7 +7,7 @@ import modelo.Articulo;
 
 /**
  * Clase que implementa la Estrategia de Ordenación de Artículos, de tal forma
- * que dado un ArrayList de Articulos, estos son ordenados por Nombre y
+ * que dado un ArrayList de Artículos, estos son ordenados por Nombre y
  * devueltos al contexto que lo llama.
  */
 public class EstrategiaConcretaArticulosNombre implements EstrategiaArticulos {

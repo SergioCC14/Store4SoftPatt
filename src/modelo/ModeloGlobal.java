@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Clase que usa el Patrón Singleton, creando instancias de si mismo, y que
- * reune las listas de Clientes, Artículos, Pedidos, Peticiones, Presupuestos,
+ * Clase que usa el Patrón Singleton, creando instancias de sí mismo, y que
+ * reúne las listas de Clientes, Artículos, Pedidos, Peticiones, Presupuestos,
  * Facturas; así como el sujeto y observadores del Patrón Observer; con el fin
  * de reunir en un solo punto todos los datos de la aplicación y acceder a ellos
  * mediante instancias de esta clase. Actualmente al ser un prototipo, los datos

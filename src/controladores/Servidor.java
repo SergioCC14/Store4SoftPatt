@@ -1,7 +1,7 @@
 package controladores;
 
 /**
- * Interfaz que define un Servidor global. Incluye su metodo enviar, que será
+ * Interface que define un Servidor global. Incluye su método enviar, que será
  * implementado en un ServidorFacturas.
  */
 public interface Servidor {

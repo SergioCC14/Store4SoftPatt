@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * Clase que define una Petición de Trabajo en nuestro sistema. Implementa la
- * clase Documento, sobreescribiendo sus métodos abstractos e implementandolos.
+ * clase Documento, sobrescribiendo sus métodos abstractos e implementándolos.
  * Así como añadiendo atributos que definen una Petición de Trabajo, que son:
  * Id, Cliente, Fecha y una lista de Artículos. Aparte de un constructor
  * principal, posee uno secundario que crea copias profundas a partir de otra

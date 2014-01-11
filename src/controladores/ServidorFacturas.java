@@ -5,8 +5,8 @@ import modelo.Fichero;
 
 /**
  * Clase que implementa un Servidor Concreto a partir de la Interfaz Servidor.
- * Incluye su metodo enviar, que envía el archivo indicado creando un nuevo
- * Fichero y añadiendolo a la lista de Ficheros enviados.
+ * Incluye su método enviar, que envía el archivo indicado creando un nuevo
+ * Fichero y añadiéndolo a la lista de Ficheros enviados.
  */
 public class ServidorFacturas implements Servidor {
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import modelo.Articulo;
 
 /**
- * Clase ObservadorConcreto que actua como Proveedor implementando la clase
+ * Clase ObservadorConcreto que actúa como Proveedor implementando la clase
  * Observador, es decir, cuando se realiza un pedido, el sujeto concreto, llama
  * a los observadores (proveedores), para que revisen si en el pedido hay
  * artículos que deban enviar ellos a la empresa.

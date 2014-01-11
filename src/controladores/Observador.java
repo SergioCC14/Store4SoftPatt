@@ -1,7 +1,7 @@
 package controladores;
 
 /**
- * Interfaz que define un Observador global. Incluye su metodo actualizar, que
+ * Interface que define un Observador global. Incluye su método actualizar, que
  * será implementado en Observadores concretos.
  */
 public interface Observador {
